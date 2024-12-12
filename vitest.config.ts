@@ -6,14 +6,14 @@ export default defineConfig({
     include: ['**/*.e2e-spec.ts'],
     globals: true,
     alias: {
-      '@src': './src',
+      '@/': './src',
       '@test': './test',
     },
     root: './',
   },
   resolve: {
     alias: {
-      '@src': './src',
+      '@/': './src',
       '@test': './test',
     },
   },
