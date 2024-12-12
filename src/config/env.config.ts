@@ -1,7 +1,5 @@
 import { z } from 'zod';
 
-process.loadEnvFile();
-
 const { PORT } = process.env;
 
 const envConfig = z.object({
