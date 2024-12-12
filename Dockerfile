@@ -2,6 +2,7 @@ FROM node:22.12-alpine3.20 AS base
 
 ENV DIR=/app
 WORKDIR $DIR
+
 ARG "NPM_TOKEN"
 
 FROM base AS dev
@@ -17,10 +18,8 @@ RUN echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ".npmrc" && \
   pnpm install --frozen-lockfile && \
   rm -f .npmrc
 
-COPY tsconfig*.json .
-COPY .swcrc .
-COPY nest-cli.json .
-COPY src src
+COPY tsconfig*.json .swcrc nest-cli.json ./
+COPY src ./src
 
 EXPOSE $PORT
 CMD ["node", "--run", "start:dev"]
@@ -36,10 +35,8 @@ RUN echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ".npmrc" && \
   pnpm install --frozen-lockfile && \
   rm -f .npmrc
 
-COPY tsconfig*.json .
-COPY .swcrc .
-COPY nest-cli.json .
-COPY src src
+COPY tsconfig*.json .swcrc nest-cli.json ./
+COPY src ./src
 
 RUN node --run build && \
   pnpm prune --prod
